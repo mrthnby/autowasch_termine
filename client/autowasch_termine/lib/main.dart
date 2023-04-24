@@ -1,7 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:autowasch_termine/product/provider/main_provider.dart';
+import 'package:autowasch_termine/view/pages/home/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MainView());
 }
 
@@ -10,14 +14,12 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Autowasch Termine",
-      home: Scaffold(
-        body: Column(
-          children: [],
-        ),
-      ),
+    return ChangeNotifierProvider(
+      create: (context) => MainProvider(),
+      child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "Autowasch Termine",
+          home: HomeView()),
     );
   }
 }
