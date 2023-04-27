@@ -1,11 +1,9 @@
 import 'package:autowasch_termine/product/constants/padding_constants.dart';
-import 'package:autowasch_termine/product/provider/main_provider.dart';
 import 'package:autowasch_termine/view/pages/admin/admin_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../user/user_view.dart';
+import '../user/view/user_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,10 +15,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   String panel1Title = "Home";
   String panel2Title = "Autowäscher Panel";
+  int _pageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final mainProvider = Provider.of<MainProvider>(context);
-
     return Scaffold(
       body: Padding(
         padding: PAGE_PADDING,
@@ -29,21 +26,21 @@ class _HomeViewState extends State<HomeView> {
           children: [
             CupertinoSegmentedControl(
               borderColor: Colors.black,
-              groupValue: mainProvider.pageIndex,
+              groupValue: _pageIndex,
               selectedColor: const Color.fromARGB(255, 247, 171, 58),
               pressedColor: Colors.grey.shade200,
               children: _segmentItems,
               onValueChanged: (value) {
-                mainProvider.pageIndex = value;
+                setState(() {
+                  _pageIndex = value;
+                });
               },
             ),
             const SizedBox(
               height: 10,
             ),
             Expanded(
-              child: mainProvider.pageIndex == 0
-                  ? const UserView()
-                  : const AdminView(),
+              child: _pageIndex == 0 ? const UserView() : const AdminView(),
             )
           ],
         ),

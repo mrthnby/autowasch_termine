@@ -1,12 +1,16 @@
-import 'package:autowasch_termine/product/provider/main_provider.dart';
+import 'package:autowasch_termine/product/controllers/user_controller.dart';
 import 'package:autowasch_termine/view/pages/home/home_view.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 void main() async {
+  initializeControllers();
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const MainView());
+}
+
+void initializeControllers() {
+  Get.put(UserController());
 }
 
 class MainView extends StatelessWidget {
@@ -14,12 +18,10 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MainProvider(),
-      child: const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Autowasch Termine",
-          home: HomeView()),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Autowasch Termine",
+      home: HomeView(),
     );
   }
 }

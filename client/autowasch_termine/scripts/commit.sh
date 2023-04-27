@@ -2,4 +2,4 @@ MESSAGE=$*
 
 git add .
 git commit -m "$MESSAGE"
-git push origin client
+git push --set-upstream origin client
