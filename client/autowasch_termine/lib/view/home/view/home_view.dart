@@ -1,9 +1,9 @@
 import 'package:autowasch_termine/product/constants/padding_constants.dart';
-import 'package:autowasch_termine/view/pages/admin/admin_view.dart';
+import 'package:autowasch_termine/view/admin/view/admin_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../user/view/user_view.dart';
+import '../../user/view/user_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -12,12 +12,13 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin{
   String panel1Title = "Home";
   String panel2Title = "Autowäscher Panel";
   int _pageIndex = 0;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Padding(
         padding: PAGE_PADDING,
@@ -66,4 +67,8 @@ class _HomeViewState extends State<HomeView> {
       ),
     };
   }
+  
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -1,5 +1,5 @@
 import 'package:autowasch_termine/product/controllers/user_controller.dart';
-import 'package:autowasch_termine/view/pages/home/home_view.dart';
+import 'package:autowasch_termine/view/home/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

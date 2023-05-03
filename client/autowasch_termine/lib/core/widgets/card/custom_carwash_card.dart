@@ -1,4 +1,4 @@
-import 'package:autowasch_termine/product/models/autowash_model.dart';
+import 'package:autowasch_termine/view/user/model/autowash_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomCarWashCard extends StatelessWidget {
@@ -61,7 +61,7 @@ class CustomCarWashCard extends StatelessWidget {
                   height: 30,
                 ),
                 Text(
-                  _autowash.availableTimes,
+                  _autowash.openingHours,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -71,7 +71,7 @@ class CustomCarWashCard extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  _autowash.phone,
+                  _autowash.phoneNumber,
                   style: const TextStyle(
                     fontSize: 16,
                   ),
