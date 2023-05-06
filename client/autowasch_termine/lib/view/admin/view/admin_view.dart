@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:autowasch_termine/core/widgets/textfield/custom_textfield.dart';
+import 'package:autowasch_termine/view/admin/view/admin_newuser_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AdminView extends StatefulWidget {
   const AdminView({super.key});
@@ -67,75 +69,15 @@ class _AdminViewState extends State<AdminView> {
                   ),
                   TextButton(
                     child: const Text("Create Account"),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(() => const CreateUser());
+                    },
                   )
                 ],
               ),
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class LoginTextField extends StatefulWidget {
-  const LoginTextField({
-    super.key,
-    required this.controller,
-    required this.hint,
-    required this.label,
-    this.isHidden = false,
-  });
-
-  final TextEditingController controller;
-  final String hint;
-  final String label;
-  final bool isHidden;
-
-  @override
-  State<LoginTextField> createState() => _LoginTextFieldState();
-}
-
-class _LoginTextFieldState extends State<LoginTextField> {
-  bool _isPassVisible = false;
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      obscureText: widget.isHidden && _isPassVisible,
-      obscuringCharacter: "•",
-      cursorColor: Colors.orange.shade300,
-      controller: widget.controller,
-      decoration: InputDecoration(
-        suffixIcon: !widget.isHidden
-            ? null
-            : IconButton(
-                color: Colors.orange.shade300,
-                splashRadius: 1,
-                onPressed: () {
-                  setState(() {
-                    _isPassVisible = !_isPassVisible;
-                  });
-                },
-                icon: Icon(
-                  _isPassVisible
-                      ? Icons.visibility_rounded
-                      : Icons.visibility_off_rounded,
-                ),
-              ),
-        enabledBorder: const OutlineInputBorder(),
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.orange.shade300)),
-        hintText: widget.hint,
-        labelText: widget.label,
-        floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-          (states) {
-            final Color color = states.contains(MaterialState.focused)
-                ? Colors.orange.shade300
-                : Colors.black;
-            return TextStyle(color: color);
-          },
-        ),
       ),
     );
   }
