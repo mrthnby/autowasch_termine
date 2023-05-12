@@ -10,17 +10,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class user {
+public class termin {
     @Id
     private String id;
     private Date createDate = new Date();
     private String name;
-    private String email;
-    private String openingHours;
-    private String price;
     private String phoneNumber;
-    private String address;
-    private String password;
-    private Integer image_id;
-
+    private String plateNumber;
+    private String autoWaschId;
 }
