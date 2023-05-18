@@ -33,9 +33,11 @@ class FakeUserService extends IUserService {
           address: "Kavacık Beykoz/İstanbul",
           openingHours: "09.00 - 18.00",
           price: "150",
-          createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
-          id: 12131,
-          password: "pass"
+          //createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
+          id: "12131",
+          password: "pass",
+          email:"s",
+          
 
         ),
         Autowash(
@@ -45,9 +47,10 @@ class FakeUserService extends IUserService {
           address: "Çağlayan Kağıthane/İstanbul",
           openingHours: "07.00 - 20.00",
           price: "120",
-           createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
-          id: 1213221,
-          password: "pass"
+          // createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
+          id: "1213221",
+          password: "pass",
+          email:"s",
         ),
         Autowash(
           photoId: 2,
@@ -56,9 +59,10 @@ class FakeUserService extends IUserService {
           address: "Levent Beşiktaş/İstanbul",
           openingHours: "06.00 - 17.00",
           price: "250",
-           createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
-          id: 121131,
-          password: "pass"
+         //  createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
+          id: "121131",
+          password: "pass",
+          email:"s",
         ),
         Autowash(
           photoId: 3,
@@ -67,9 +71,10 @@ class FakeUserService extends IUserService {
           address: "Ataket Küçükçekmece/İstanbul",
           openingHours: "10.00 - 23.00",
           price: "200",
-           createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
-          id: 1213121,
-          password: "pass"
+          // createDate: DateTime.parse("2023-05-02T22:14:39.769+00:00"),
+          id: "1213121",
+          password: "pass",
+          email:"s",
         ),
       ],
     );

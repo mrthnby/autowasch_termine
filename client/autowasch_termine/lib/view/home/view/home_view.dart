@@ -7,12 +7,12 @@ import '../../user/view/user_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
-
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin{
+  
   String panel1Title = "Home";
   String panel2Title = "Autowäscher Panel";
   int _pageIndex = 0;
@@ -69,6 +69,5 @@ class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin{
   }
   
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
