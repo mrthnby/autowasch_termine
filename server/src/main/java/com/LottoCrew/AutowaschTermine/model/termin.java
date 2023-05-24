@@ -13,9 +13,8 @@ import java.util.Date;
 public class termin {
     @Id
     private String id;
-    private Date createDate = new Date();
+    private Date terminDate = new Date();
     private String name;
-    private String terminDate;
     private String phoneNumber;
     private String plateNumber;
     private String autoWaschId;

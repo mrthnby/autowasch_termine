@@ -13,7 +13,6 @@ import java.util.Date;
 public class user {
     @Id
     private String id;
-    private Date createDate = new Date();
     private String name;
     private String email;
     private String openingHours;
