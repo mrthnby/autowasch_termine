@@ -15,6 +15,7 @@ public class termin {
     private String id;
     private Date createDate = new Date();
     private String name;
+    private String terminDate;
     private String phoneNumber;
     private String plateNumber;
     private String autoWaschId;
