@@ -2,8 +2,9 @@ import 'package:autowasch_termine/core/base/service/user_service_interface.dart'
 import 'package:autowasch_termine/product/controllers/user_controller.dart';
 import 'package:autowasch_termine/product/enum/user_enums.dart';
 import 'package:autowasch_termine/view/user/model/autowash_model.dart';
-import 'package:autowasch_termine/view/user/model/booking_model.dart';
 import 'package:autowasch_termine/view/user/service/fake_user_service.dart';
+
+import '../../booking/model/booking_model.dart';
 
 class UserViewModel extends IUserService {
   //final IUserService _userService = UserService();

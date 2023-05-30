@@ -35,7 +35,7 @@ class _AdminViewState extends State<AdminView> {
             child: Form(
               child: Column(
                 children: [
-                  LoginTextField(
+                  CustomTextField(
                     hint: "example@mail.com",
                     label: "E-Mail",
                     controller: emailController,
@@ -43,7 +43,7 @@ class _AdminViewState extends State<AdminView> {
                   const SizedBox(
                     height: 10,
                   ),
-                  LoginTextField(
+                  CustomTextField(
                     hint: "123456",
                     label: "Password",
                     controller: passwordController,

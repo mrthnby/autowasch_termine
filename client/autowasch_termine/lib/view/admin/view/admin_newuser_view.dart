@@ -22,8 +22,11 @@ class _CreateUserState extends State<CreateUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
+        title: Text("Create a New Account",
+            style: TextStyle(color: Colors.orange.shade600)),
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Get.back();
@@ -40,14 +43,6 @@ class _CreateUserState extends State<CreateUser> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Create a New Account",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontSize: 35),
-                textAlign: TextAlign.left,
-              ),
               const SizedBox(
                 height: 10,
               ),
@@ -56,7 +51,7 @@ class _CreateUserState extends State<CreateUser> {
                 child: Form(
                   child: Column(
                     children: [
-                      LoginTextField(
+                      CustomTextField(
                         hint: "König Autowasch",
                         label: "Autowasch Name",
                         controller: nameController,
@@ -64,7 +59,7 @@ class _CreateUserState extends State<CreateUser> {
                       const SizedBox(
                         height: 10,
                       ),
-                      LoginTextField(
+                      CustomTextField(
                         hint: "example@mail.com",
                         label: "E-Mail",
                         controller: emailController,
@@ -72,7 +67,7 @@ class _CreateUserState extends State<CreateUser> {
                       const SizedBox(
                         height: 10,
                       ),
-                      LoginTextField(
+                      CustomTextField(
                         hint: "+90 553 985 44 85",
                         label: "Phone",
                         controller: phoneController,
@@ -80,7 +75,7 @@ class _CreateUserState extends State<CreateUser> {
                       const SizedBox(
                         height: 10,
                       ),
-                      LoginTextField(
+                      CustomTextField(
                         hint: "Kavacık Beykoz/Istanbul",
                         label: "Adress",
                         controller: adressController,
@@ -89,7 +84,7 @@ class _CreateUserState extends State<CreateUser> {
                       const SizedBox(
                         height: 10,
                       ),
-                      LoginTextField(
+                      CustomTextField(
                         hint: "09.00 - 18.00",
                         label: "Opening Hours",
                         controller: hoursController,
@@ -97,7 +92,7 @@ class _CreateUserState extends State<CreateUser> {
                       const SizedBox(
                         height: 10,
                       ),
-                      LoginTextField(
+                      CustomTextField(
                         hint: "150",
                         label: "Price",
                         controller: priceController,
@@ -106,7 +101,7 @@ class _CreateUserState extends State<CreateUser> {
                       const SizedBox(
                         height: 10,
                       ),
-                      LoginTextField(
+                      CustomTextField(
                         hint: "123456",
                         label: "Password",
                         controller: passwordController,

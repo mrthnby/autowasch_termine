@@ -8,7 +8,7 @@ part of 'autowash_model.dart';
 
 Autowash _$AutowashFromJson(Map<String, dynamic> json) => Autowash(
       id: json['id'] as String,
-      photoId: json['image_id'] as int,
+      photoId: json['photoId'] as int,
       name: json['name'] as String,
       email: json['email'] as String,
       address: json['address'] as String,
@@ -16,12 +16,11 @@ Autowash _$AutowashFromJson(Map<String, dynamic> json) => Autowash(
       password: json['password'] as String,
       phoneNumber: json['phoneNumber'] as String,
       openingHours: json['openingHours'] as String,
-      //createDate: DateTime.parse(json['createDate'] as String),
     );
 
 Map<String, dynamic> _$AutowashToJson(Autowash instance) => <String, dynamic>{
       'id': instance.id,
-      'image_id': instance.photoId,
+      'photoId': instance.photoId,
       'name': instance.name,
       'email': instance.email,
       'openingHours': instance.openingHours,
@@ -29,5 +28,4 @@ Map<String, dynamic> _$AutowashToJson(Autowash instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'address': instance.address,
       'password': instance.password,
-      //'createDate': instance.createDate.toIso8601String(),
     };

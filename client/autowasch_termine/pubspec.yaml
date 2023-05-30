@@ -41,7 +41,8 @@ dependencies:
   get: ^4.6.5
   json_annotation: ^4.8.1
   dio: ^5.1.2
-  
+  window_manager: ^0.3.4
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
