@@ -12,7 +12,7 @@ Booking _$BookingFromJson(Map<String, dynamic> json) => Booking(
       phoneNumber: json['phoneNumber'] as String,
       plateNumber: json['plateNumber'] as String,
       autoWaschId: json['autoWaschId'] as String,
-      bookingDate: DateTime.parse(json['bookingDate'] as String),
+      terminDate: DateTime.parse(json['terminDate'] as String),
     );
 
 Map<String, dynamic> _$BookingToJson(Booking instance) => <String, dynamic>{
@@ -21,5 +21,5 @@ Map<String, dynamic> _$BookingToJson(Booking instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'plateNumber': instance.plateNumber,
       'autoWaschId': instance.autoWaschId,
-      'bookingDate': instance.bookingDate.toIso8601String(),
+      'terminDate': instance.terminDate.toIso8601String(),
     };

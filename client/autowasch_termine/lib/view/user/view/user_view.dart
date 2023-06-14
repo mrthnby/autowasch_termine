@@ -63,13 +63,14 @@ class _UserViewState extends State<UserView> {
               ),
             )
           : userController.autowashLoadingState == AutowashLoadingState.ERROR
-              ? const Center(
-                //TODO : Farklı hata durumları için farklı viewlar hazırla
-                child: Text(
-                    "ERROR",
-                    style: TextStyle(color: Colors.blueAccent, fontSize: 30),
+              ? const Expanded(
+                  child: Center(
+                    child: Text(
+                      "ERROR",
+                      style: TextStyle(color: Colors.orange, fontSize: 30),
+                    ),
                   ),
-              )
+                )
               : Expanded(
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),

@@ -52,6 +52,15 @@ class _BookingViewState extends State<BookingView> {
             Icons.arrow_back_ios_new_rounded,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.delete_rounded),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+        ],
         centerTitle: true,
         backgroundColor: Colors.orange.shade400,
       ),
@@ -146,7 +155,7 @@ class _BookingViewState extends State<BookingView> {
                     child: Text("Available Hours:"),
                   ),
                   pickedDate == null
-                      ?const  Expanded(
+                      ? const Expanded(
                           child: Center(
                             child: Text("Please select a date"),
                           ),

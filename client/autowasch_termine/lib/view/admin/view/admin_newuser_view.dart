@@ -1,4 +1,6 @@
 import 'package:autowasch_termine/core/widgets/textfield/custom_textfield.dart';
+import 'package:autowasch_termine/view/admin/viewmodel/admin_viewmodel.dart';
+import 'package:autowasch_termine/view/user/model/autowash_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +20,8 @@ class _CreateUserState extends State<CreateUser> {
   var priceController = TextEditingController();
   var hoursController = TextEditingController();
   int choosenPhoto = 0;
+
+  AdminViewmodel adminViewmodel = AdminViewmodel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,81 +116,7 @@ class _CreateUserState extends State<CreateUser> {
                       ),
                       TextButton(
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return StatefulBuilder(
-                                builder: (context, setState) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 300,
-                                      vertical: 150,
-                                    ),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: GridView.builder(
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          itemCount: 6,
-                                          gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
-                                          ),
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                setState(() {
-                                                  choosenPhoto = index;
-                                                  Get.back();
-                                                });
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(4.0),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                    color: index == choosenPhoto
-                                                        ? Colors.orange.shade400
-                                                        : Colors.white,
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12),
-                                                      child: AspectRatio(
-                                                        aspectRatio: 1,
-                                                        child: Image.asset(
-                                                          "assets/images/logo_car_wash_$index.jpg",
-                                                          height: 100,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            },
-                          );
+                          _showImagePicker(context);
                         },
                         child: const Text("Pick a Photo"),
                       ),
@@ -194,7 +124,47 @@ class _CreateUserState extends State<CreateUser> {
                         height: 15,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (nameController.text == "" ||
+                              emailController.text == "" ||
+                              adressController.text == "" ||
+                              priceController.text == "" ||
+                              passwordController.text == "" ||
+                              phoneController.text == "" ||
+                              hoursController.text == "") {
+                            Get.showSnackbar(
+                              GetSnackBar(
+                                title: "Error",
+                                messageText: const Text(
+                                  "Bitte füllen sie jede Field",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                backgroundColor: Colors.orange,
+                                borderRadius: 12,
+                                margin: EdgeInsets.symmetric(
+                                  vertical: 4,
+                                  horizontal: Get.size.width / 4.toInt(),
+                                ),
+                                snackPosition: SnackPosition.TOP,
+                              ),
+                            );
+                          } else {
+                            adminViewmodel.createNewUser(
+                              Autowash(
+                                image_id: choosenPhoto,
+                                name: nameController.text,
+                                email: emailController.text,
+                                address: adressController.text,
+                                price: priceController.text,
+                                password: passwordController.text,
+                                phoneNumber: phoneController.text,
+                                openingHours: hoursController.text,
+                              ),
+                            );
+                          }
+                        },
                         style: ElevatedButton.styleFrom(
                           fixedSize: const Size(150, 60),
                           backgroundColor: Colors.orange.shade400,
@@ -212,6 +182,81 @@ class _CreateUserState extends State<CreateUser> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> _showImagePicker(BuildContext context) async {
+    var height = MediaQuery.of(context).size.height / 6.5;
+    var width = MediaQuery.of(context).size.width / 6;
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: width,
+                vertical: height,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: 6,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                      ),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              choosenPhoto = index;
+                              Get.back();
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: index == choosenPhoto
+                                    ? Colors.orange.shade400
+                                    : Colors.white,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Image.asset(
+                                      "assets/images/logo_car_wash_$index.jpg",
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

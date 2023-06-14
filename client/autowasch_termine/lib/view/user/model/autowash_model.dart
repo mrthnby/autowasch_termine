@@ -1,10 +1,12 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:json_annotation/json_annotation.dart';
 part 'autowash_model.g.dart';
 
 @JsonSerializable()
 class Autowash {
-  String id;
-  int photoId;
+  String? id;
+  int image_id;
   String name;
   String email;
   String openingHours;
@@ -12,11 +14,10 @@ class Autowash {
   String phoneNumber;
   String address;
   String password;
-  //DateTime createDate;
 
   Autowash({
-    required this.id,
-    required this.photoId,
+    this.id,
+    required this.image_id,
     required this.name,
     required this.email,
     required this.address,
@@ -24,11 +25,10 @@ class Autowash {
     required this.password,
     required this.phoneNumber,
     required this.openingHours,
-    //required this.createDate,
   });
 
   String getPhoto() {
-    return "assets/images/logo_car_wash_$photoId.jpg";
+    return "assets/images/logo_car_wash_$image_id.jpg";
   }
 
   static Autowash fromJson(Map<String, dynamic> json) =>
@@ -40,4 +40,6 @@ class Autowash {
   String toString() {
     return name;
   }
+
+ 
 }

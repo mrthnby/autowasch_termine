@@ -1,28 +1,40 @@
 import 'package:autowasch_termine/core/base/service/booking_service_interface.dart';
+import 'package:autowasch_termine/core/service/api_service.dart';
+import 'package:autowasch_termine/product/extensions/date_extensions.dart';
+import 'package:autowasch_termine/view/admin/service/admin_service.dart';
 import 'package:autowasch_termine/view/booking/model/booking_model.dart';
-import 'package:dio/dio.dart';
 
-class BookingServices extends IBookingService {
-  BookingServices instance = BookingServices._();
+import '../../user/model/autowash_model.dart';
 
-  BookingServices._();
-  final String _baseUrl = " http://localhost:8080";
-  final Dio _dio = Dio();
+class BookingServices extends IBookingService with ApiSerivce {
+
+
   @override
-  Future<String> addBookig(Booking booking) async {
-    final response =
-        await _dio.post("$_baseUrl/termins", data: Booking.toJson(booking));
-    return response.data;
+  Future<Booking> addBookig(Booking booking) async {
+    final response = await dio.post(API_PATHS.termins.getPath,
+        data: Booking.toJson(booking));
+    return Booking.fromJson(response.data);
   }
 
   @override
-  Future<void> deleteTermin(String id) async {
-    await _dio.delete("$_baseUrl/termins/$id");
+  Future<void> deleteBooking(String id) async {
+    await dio.delete("${API_PATHS.termins.getPath}/$id");
   }
 
   @override
-  List<int> getUnavailableHours(DateTime date) {
-    // TODO: implement getUnavailableHours
-    throw UnimplementedError();
+  Future<List<int>> getUnavailableHours(
+    DateTime date,
+    Autowash autowash,
+    int openingHour,
+    int closingHour,
+  ) async {
+    List<int> unavailableHours = [];
+    List<Booking> termins = await AdminService().getTermins(autowash);
+    for (Booking termin in termins) {
+      if (date.isInSameDay(termin.terminDate)) {
+        unavailableHours.add(termin.terminDate.hour);
+      }
+    }
+    return unavailableHours;
   }
 }

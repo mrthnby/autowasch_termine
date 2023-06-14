@@ -1,3 +1,4 @@
+import 'package:autowasch_termine/product/controllers/admin_controller.dart';
 import 'package:autowasch_termine/product/controllers/user_controller.dart';
 import 'package:autowasch_termine/view/home/view/home_view.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
+    size: Size(1024, 700),
     minimumSize: Size(1024, 700),
     center: true,
   );
@@ -22,6 +24,7 @@ void main() async {
 
 void initializeControllers() {
   Get.put(UserController());
+  Get.put(AdminController());
 }
 
 class MainView extends StatelessWidget {

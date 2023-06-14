@@ -8,7 +8,7 @@ part of 'autowash_model.dart';
 
 Autowash _$AutowashFromJson(Map<String, dynamic> json) => Autowash(
       id: json['id'] as String,
-      photoId: json['photoId'] as int,
+      image_id: json['image_id'] as int,
       name: json['name'] as String,
       email: json['email'] as String,
       address: json['address'] as String,
@@ -20,7 +20,7 @@ Autowash _$AutowashFromJson(Map<String, dynamic> json) => Autowash(
 
 Map<String, dynamic> _$AutowashToJson(Autowash instance) => <String, dynamic>{
       'id': instance.id,
-      'photoId': instance.photoId,
+      'image_id': instance.image_id,
       'name': instance.name,
       'email': instance.email,
       'openingHours': instance.openingHours,

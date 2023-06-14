@@ -8,7 +8,7 @@ class Booking {
   String phoneNumber;
   String plateNumber;
   String autoWaschId;
-  DateTime bookingDate;
+  DateTime terminDate;
 
   Booking({
     required this.id,
@@ -16,7 +16,7 @@ class Booking {
     required this.phoneNumber,
     required this.plateNumber,
     required this.autoWaschId,
-    required this.bookingDate,
+    required this.terminDate,
   });
 
   static Booking fromJson(Map<String, dynamic> json) => _$BookingFromJson(json);
