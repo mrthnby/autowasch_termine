@@ -2,6 +2,7 @@ import 'package:autowasch_termine/core/base/service/admin_service_interface.dart
 import 'package:autowasch_termine/product/controllers/admin_controller.dart';
 import 'package:autowasch_termine/view/admin/service/admin_service.dart';
 import 'package:autowasch_termine/view/booking/model/booking_model.dart';
+import 'package:autowasch_termine/view/booking/service/booking_services.dart';
 import 'package:autowasch_termine/view/user/model/autowash_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,6 +25,8 @@ class AdminViewmodel extends IAdminService {
     for (var element in termins) {
       if (!element.terminDate.isBefore(DateTime.now())) {
         res.add(element);
+      } else {
+        BookingServices().deleteBooking(element.id ?? "");
       }
     }
     res.sort(
