@@ -12,6 +12,7 @@ class CustomTextField extends StatefulWidget {
     this.isReadOnly = false,
     this.prefixIcon,
     this.onTap,
+    this.onSubmitted,
   });
 
   final TextEditingController controller;
@@ -23,6 +24,7 @@ class CustomTextField extends StatefulWidget {
   final bool isReadOnly;
   final Icon? prefixIcon;
   final VoidCallback? onTap;
+  final Function(String)? onSubmitted;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -33,7 +35,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
+      onFieldSubmitted: widget.onSubmitted,
       onTap: widget.onTap,
       readOnly: widget.isReadOnly,
       maxLines: widget.maxLines,

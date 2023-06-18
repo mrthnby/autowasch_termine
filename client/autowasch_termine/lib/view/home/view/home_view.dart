@@ -11,8 +11,8 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin{
-  
+class _HomeViewState extends State<HomeView>
+    with AutomaticKeepAliveClientMixin {
   String panel1Title = "Home";
   String panel2Title = "Autowäscher Panel";
   int _pageIndex = 0;
@@ -67,7 +67,7 @@ class _HomeViewState extends State<HomeView> with AutomaticKeepAliveClientMixin{
       ),
     };
   }
-  
+
   @override
   bool get wantKeepAlive => true;
 }

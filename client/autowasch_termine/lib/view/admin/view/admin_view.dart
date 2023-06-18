@@ -1,6 +1,8 @@
 import 'package:autowasch_termine/core/widgets/textfield/custom_textfield.dart';
 import 'package:autowasch_termine/product/controllers/admin_controller.dart';
 import 'package:autowasch_termine/view/admin/view/admin_newuser_view.dart';
+import 'package:autowasch_termine/view/admin/view/admin_panel_view.dart';
+import 'package:autowasch_termine/view/admin/viewmodel/admin_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,14 +17,15 @@ class _AdminViewState extends State<AdminView> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   AdminController adminController = AdminController.instance;
+  AdminViewmodel adminViewmodel = AdminViewmodel();
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: adminController.loggedUser != null
-      ? Column(
-        children: [],
-      )
-      : _loginScreen(context),
+      child: Obx(
+        () => adminController.isLoggedIn
+            ? const AdminPanel()
+            : _loginScreen(context),
+      ),
     );
   }
 
@@ -57,12 +60,15 @@ class _AdminViewState extends State<AdminView> {
                   label: "Password",
                   controller: passwordController,
                   isHidden: true,
+                  onSubmitted: (p0) {
+                    _login();
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _login,
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(150, 60),
                     backgroundColor: Colors.orange.shade400,
@@ -88,5 +94,34 @@ class _AdminViewState extends State<AdminView> {
         )
       ],
     );
+  }
+
+  void _login() {
+    if (emailController.text == "" || passwordController.text == "") {
+      Get.showSnackbar(
+        GetSnackBar(
+          title: "Error",
+          messageText: const Text(
+            "Bitte füllen sie jede Field",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.orange,
+          borderRadius: 12,
+          margin: EdgeInsets.symmetric(
+            vertical: 4,
+            horizontal: Get.size.width / 4.toInt(),
+          ),
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    } else {
+      adminViewmodel.login(
+        emailController.text,
+        passwordController.text,
+      );
+    }
   }
 }
