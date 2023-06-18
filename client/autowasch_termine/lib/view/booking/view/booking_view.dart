@@ -1,8 +1,12 @@
 import 'package:autowasch_termine/core/widgets/textfield/custom_textfield.dart';
+import 'package:autowasch_termine/view/booking/model/booking_model.dart';
+import 'package:autowasch_termine/view/booking/viewmodel/booking_viewmodel.dart';
 import 'package:autowasch_termine/view/user/model/autowash_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
+import '../../../product/controllers/user_controller.dart';
 
 class BookingView extends StatefulWidget {
   const BookingView({super.key, required this.autowash});
@@ -19,6 +23,9 @@ class _BookingViewState extends State<BookingView> {
   final phoneController = TextEditingController();
   DateTime? pickedDate;
   DateTime? selectedDate;
+  BookingViewModel bookingViewModel = BookingViewModel();
+  List<int> _unavailableHours = [];
+  UserController userController = UserController.instance;
 
   late final int _openingHour =
       int.parse(widget.autowash.openingHours.split("-")[0].split(".")[0]);
@@ -35,8 +42,14 @@ class _BookingViewState extends State<BookingView> {
     return hour / 10 >= 1 ? "$hour:00" : "0$hour:00";
   }
 
-  List<int> _getUnavailableHours(DateTime currentDate) {
-    return [9, 12];
+  void _getUnavailableHours(DateTime currentDate) async {
+    List<int> res = await bookingViewModel.getUnavailableHours(
+        currentDate, widget.autowash, _openingHour, _closingHour);
+    if (mounted) {
+      setState(() {
+        _unavailableHours = res;
+      });
+    }
   }
 
   @override
@@ -169,9 +182,11 @@ class _BookingViewState extends State<BookingView> {
                             ),
                             itemCount: _getTerminCount(),
                             itemBuilder: (context, index) {
-                              return _getUnavailableHours(
+                              _getUnavailableHours(
                                 pickedDate ?? DateTime.now(),
-                              ).contains(_openingHour + index)
+                              );
+                              return _unavailableHours
+                                      .contains(_openingHour + index)
                                   ? Chip(
                                       elevation: 0,
                                       backgroundColor: Colors.orange.shade300,
@@ -220,7 +235,71 @@ class _BookingViewState extends State<BookingView> {
                           ),
                         ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (nameController.text != "" &&
+                          phoneController.text != "" &&
+                          plateController.text != "" &&
+                          pickedDate != null &&
+                          _selectedHour != null) {
+                        bookingViewModel
+                            .addBookig(
+                          Booking(
+                            name: nameController.text,
+                            phoneNumber: phoneController.text,
+                            plateNumber: plateController.text,
+                            autoWaschId: widget.autowash.id ?? "",
+                            terminDate: pickedDate!,
+                          ),
+                        )
+                            .then((value) {
+                          userController.usersBookings.add(value);
+                          nameController.text = "";
+                          phoneController.text = "";
+                          plateController.text = "";
+                          pickedDate = null;
+                          _selectedHour = null;
+                          Get.showSnackbar(
+                            GetSnackBar(
+                              title: "Thanks",
+                              messageText: const Text(
+                                "Ihr Termin ist gemacht worden",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              backgroundColor: Colors.green.shade300,
+                              borderRadius: 12,
+                              margin: EdgeInsets.symmetric(
+                                vertical: 4,
+                                horizontal: Get.size.width / 4.toInt(),
+                              ),
+                              snackPosition: SnackPosition.TOP,
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        });
+                      } else {
+                        Get.showSnackbar(
+                          GetSnackBar(
+                            title: "Error",
+                            messageText: const Text(
+                              "Bitte füllen sie jede Field",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            backgroundColor: Colors.orange,
+                            borderRadius: 12,
+                            margin: EdgeInsets.symmetric(
+                              vertical: 4,
+                              horizontal: Get.size.width / 4.toInt(),
+                            ),
+                            snackPosition: SnackPosition.TOP,
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(150, 60),
                       backgroundColor: Colors.orange.shade400,

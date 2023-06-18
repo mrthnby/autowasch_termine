@@ -3,7 +3,7 @@ part 'booking_model.g.dart';
 
 @JsonSerializable()
 class Booking {
-  String id;
+  String? id;
   String name;
   String phoneNumber;
   String plateNumber;
@@ -11,7 +11,7 @@ class Booking {
   DateTime terminDate;
 
   Booking({
-    required this.id,
+    this.id,
     required this.name,
     required this.phoneNumber,
     required this.plateNumber,
