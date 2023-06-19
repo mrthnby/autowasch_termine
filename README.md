@@ -19,7 +19,7 @@ Dies ist ein Projekt zur Verwaltung von Autowasch-Terminen. App ermöglicht Auto
 
 1. Klonen Sie das Repository: `git clone https://github.com/your-username/autowasch-termine.git`
 2. Navigieren Sie in das Projektverzeichnis: `cd autowasch-termine`
-3. Installieren Sie die Abhängigkeiten: `flutter pub get`,
+3. Installieren Sie die Abhängigkeiten: `flutter pub get`
 4. Ausführen sie die Server App `javac AutowaschTermineApplication.java || java AutowaschTermineApplication`
 5. Starten Sie die Anwendung: `flutter run`
 
