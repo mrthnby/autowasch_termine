@@ -23,5 +23,10 @@ Dies ist ein Projekt zur Verwaltung von Autowasch-Terminen. App ermöglicht Auto
 4. Ausführen sie die Server App `javac AutowaschTermineApplication.java || java AutowaschTermineApplication`
 5. Starten Sie die Anwendung: `flutter run`
 
+## Screenshots
 
+![home](https://github.com/mrthnby/autowasch_termine/assets/72457200/9650a384-b2cc-4b3f-aee2-ea8ec1eda243)
+![booking](https://github.com/mrthnby/autowasch_termine/assets/72457200/153c096e-df4a-4174-b265-02b0de1b7267)
+![login](https://github.com/mrthnby/autowasch_termine/assets/72457200/55928fef-af7e-4120-8b2e-17cc407730d8)
+![register](https://github.com/mrthnby/autowasch_termine/assets/72457200/88a9cfc1-2c4f-4d09-be3e-1e6141508d5a)
 
